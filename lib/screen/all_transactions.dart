@@ -1,3 +1,5 @@
+import 'package:bank/provider/initialize_db.dart';
+import 'package:bank/provider/transaction_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../provider/sql_transaction.dart';
@@ -13,13 +15,23 @@ class AllTransactionsScreen extends StatefulWidget {
 
 class _AllTransactionsScreenState extends State<AllTransactionsScreen> {
   late Future _detailsFuture;
-  SqlTransaction db1 = new SqlTransaction();
+  DatabaseHelper db1 = DatabaseHelper();
+  late TransferDB transaction;
 
   @override
   void initState() {
-    _detailsFuture = db1.transactioninf();
+    transaction = TransferDB(db1);
+
+    _detailsFuture = transaction.transactioninf();
     super.initState();
   }
+  // SqlTransaction db1 = new SqlTransaction();
+
+  // @override
+  // void initState() {
+  //   _detailsFuture = db1.transactioninf();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {

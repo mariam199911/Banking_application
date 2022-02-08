@@ -1,3 +1,5 @@
+import 'package:bank/provider/customer_helper.dart';
+import 'package:bank/provider/initialize_db.dart';
 import 'package:flutter/material.dart';
 
 import '../provider/sql_helper.dart';
@@ -13,11 +15,25 @@ class AllCustomerScreen extends StatefulWidget {
 
 class _AllCustomerScreenState extends State<AllCustomerScreen> {
   late Future _detailsFuture;
-  SqlHelper db1 = new SqlHelper();
+  // SqlHelper db1 = new SqlHelper();
+
+  // @override
+  // void initState() {
+  //   _detailsFuture = db1.customersinf();
+  //   super.initState();
+  // }
+  DatabaseHelper db1 = DatabaseHelper();
+  late CustomerDB customer;
 
   @override
   void initState() {
-    _detailsFuture = db1.customersinf();
+    // load();
+    // customer.insertItems();
+    // db1.initializeDB().whenComplete(() {
+    customer = CustomerDB(db1);
+    // customer.insertItems();
+    // });
+    _detailsFuture = customer.customersinf();
     super.initState();
   }
 
@@ -47,7 +63,7 @@ class _AllCustomerScreenState extends State<AllCustomerScreen> {
                     itemBuilder: (ctx, i) => CustomerInfoItem(
                         // email: snapshot.data[i].email,
                         snapshot.data[i]),
-                    itemCount: 10,
+                    itemCount: snapshot.data.length,
                   );
                 }
               }

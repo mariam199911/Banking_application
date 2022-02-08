@@ -2,7 +2,7 @@ class Customer {
   final int id;
   final String name;
   final String email;
-  final int balance;
+  final double balance;
 
   Customer({
     required this.id,

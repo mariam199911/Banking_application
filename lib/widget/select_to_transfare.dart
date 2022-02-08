@@ -1,3 +1,6 @@
+import 'package:bank/provider/customer_helper.dart';
+import 'package:bank/provider/initialize_db.dart';
+import 'package:bank/provider/transaction_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../models/customer.dart';
@@ -27,14 +30,14 @@ class ChooseCustomer extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        SqlHelper db1 = new SqlHelper();
-        db1.updateCustomer(tocustomer);
-        db1.updateCustomer(fromcustomer);
-        SqlTransaction db2 = new SqlTransaction();
+        DatabaseHelper db1 = DatabaseHelper();
+        CustomerDB customer = CustomerDB(db1);
+        TransferDB transaction = TransferDB(db1);
+        customer.updateCustomer(fromcustomer);
+        customer.updateCustomer(tocustomer);
         EachTransaction newTransaction =
             EachTransaction(from: from, to: co, amount: amount);
-        db2.insertTransaction(newTransaction);
-        // Future<List<Transactioninformation>> n = db2.transactioninf();
+        transaction.insertTransaction(newTransaction);
 
         Navigator.pushReplacementNamed(context, '/finish_screen');
       },

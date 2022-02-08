@@ -50,19 +50,6 @@ class HomeScreen extends StatelessWidget {
             ),
             color: Colors.red[400],
           ),
-          // RaisedButton(
-          //   color: Colors.cyan[200],
-          //   onPressed: () {
-          //     Navigator.pushNamed(context, '/customers_screen');
-          //   },
-          //   child: const Text(
-          //     'All Customets',
-          //     style: TextStyle(
-          //       color: Colors.white,
-          //       fontWeight: FontWeight.bold,
-          //     ),
-          //   ),
-          // )
         ],
       ),
     );

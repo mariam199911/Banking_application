@@ -1,3 +1,5 @@
+import 'package:bank/provider/customer_helper.dart';
+import 'package:bank/provider/initialize_db.dart';
 import 'package:flutter/material.dart';
 
 import '../models/customer.dart';
@@ -17,13 +19,23 @@ class TransferToCustomerScreen extends StatefulWidget {
 
 class _TransferToCustomerScreenState extends State<TransferToCustomerScreen> {
   late Future _detailsFuture;
-  SqlHelper db1 = new SqlHelper();
+  // SqlHelper db1 = new SqlHelper();
+
+  // @override
+  // void initState() {
+  //   print(widget.amount);
+  //   print(widget.from);
+  //   _detailsFuture = db1.customersinf();
+  //   super.initState();
+  // }
+  DatabaseHelper db1 = DatabaseHelper();
+  late CustomerDB customer;
 
   @override
   void initState() {
-    print(widget.amount);
-    print(widget.from);
-    _detailsFuture = db1.customersinf();
+    customer = CustomerDB(db1);
+
+    _detailsFuture = customer.customersinf();
     super.initState();
   }
 
